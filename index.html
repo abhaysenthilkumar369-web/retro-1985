@@ -1,0 +1,435 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>StalinSoft Soviet Simulator</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <script type="importmap">
+      {
+        "imports": {
+          "@google/genai": "https://esm.sh/@google/genai@0.7.0",
+          "@tailwindcss/browser": "https://esm.sh/@tailwindcss/browser@^4.1.3"
+        }
+      }
+    </script>
+  <link rel="stylesheet" href="/index.css">
+</head>
+  <body>
+    <div class="desktop" id="desktop">
+      <!-- Desktop Icons -->
+      <div class="icon" data-app="myComputer">
+        <img
+          src="https://storage.googleapis.com/gemini-95-icons/mycomputer.png"
+          alt="My Computer"
+          style="width: 70px; height: 50px; filter: sepia(1) hue-rotate(-50deg) saturate(2);"
+        />
+        <span>Comrade's PC</span>
+      </div>
+      <div class="icon" data-app="chrome">
+        <img src="https://storage.googleapis.com/gemini-95-icons/chrome-icon-2.png" alt="Iron Curtain" style="filter: grayscale(1) sepia(1) hue-rotate(-50deg);" />
+        <span>Iron Curtain</span>
+      </div>
+      <div class="icon" data-app="notepad">
+        <img src="https://storage.googleapis.com/gemini-95-icons/GemNotes.png" alt="Pravda" style="filter: grayscale(1) sepia(1) hue-rotate(-50deg);" />
+        <span>Pravda Editor</span>
+      </div>
+      <div class="icon" data-app="paint">
+        <img src="https://storage.googleapis.com/gemini-95-icons/gempaint.png" alt="Labor Art" style="filter: grayscale(1) sepia(1) hue-rotate(-50deg);" />
+        <span>Labor Art</span>
+      </div>
+      <div class="icon" data-app="doom">
+        <img
+          src="https://64.media.tumblr.com/1d89dfa76381e5c14210a2149c83790d/7a15f84c681c1cf9-c1/s540x810/86985984be99d5591e0cbc0dea6f05ffa3136dac.png"
+          alt="Doom II"
+        />
+        <span>Glorious Battle</span>
+      </div>
+      <div class="icon" data-app="gemini">
+        <img
+          src="https://storage.googleapis.com/gemini-95-icons/GeminiChatRetro.png"
+          alt="State Intelligence"
+          style="filter: grayscale(1) sepia(1) hue-rotate(-50deg);"
+        />
+        <span>State Intelligence</span>
+      </div>
+      <div class="icon" data-app="minesweeper">
+        <img
+          src="https://storage.googleapis.com/gemini-95-icons/gemsweeper.png"
+          alt="Mines Of Capital"
+          style="width: 48px; height: 48px; filter: grayscale(1) sepia(1) hue-rotate(-50deg);"
+        />
+        <span>Capitalist Mines</span>
+      </div>
+      <div class="icon" data-app="mediaPlayer">
+        <img
+          src="https://storage.googleapis.com/gemini-95-icons/ytmediaplayer.png"
+          alt="Radio Moscow"
+          style="width: 48px; height: 48px; filter: grayscale(1) sepia(1) hue-rotate(-50deg);"
+        />
+        <span>Radio Moscow</span>
+      </div>
+
+
+      <!-- Windows -->
+      <div class="window resizable" id="myComputer">
+        <div class="window-titlebar">
+          <span class="window-title">Comrade's PC</span>
+          <div class="window-controls">
+            <div class="window-minimize window-control-button">−</div>
+            <div class="window-maximize window-control-button">□</div>
+            <div class="window-close window-control-button">✕</div>
+          </div>
+        </div>
+        <div class="window-content" style="background-color: white">
+          <div id="c-drive-icon" class="window-icon">
+            <img src="https://storage.googleapis.com/gemini-95-icons/cdrive.png" alt="C Drive" />
+            <span>State Drive (C:)</span>
+          </div>
+          <div id="c-drive-content" style="display: none">
+            <div id="secret-image-icon" class="window-icon">
+              <img
+                src="https://win98icons.alexmeub.com/icons/png/paint_file-0.png"
+                alt="Secret File"
+              />
+              <span>classification_redacted.jpg</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="window resizable" id="chrome">
+        <div class="window-titlebar">
+          <span class="window-title">Iron Curtain Browser</span>
+          <div class="window-controls">
+            <div class="window-minimize window-control-button">−</div>
+            <div class="window-maximize window-control-button">□</div>
+            <div class="window-close window-control-button">✕</div>
+          </div>
+        </div>
+        <div class="window-content">
+          <div class="browser-toolbar">
+            <div class="address-bar-container">
+              <input
+                type="text"
+                class="browser-address-bar"
+                placeholder="Request access to state information..."
+                value="https://www.pravda.ru"
+              />
+              <button class="browser-go-button">Search!</button>
+            </div>
+          </div>
+          <div class="browser-viewport">
+            <iframe
+              id="browser-frame"
+              src="https://web.archive.org/web/19990428171538/http://google.com/"
+              width="100%"
+              height="100%"
+            ></iframe>
+            <div class="browser-loading">
+              Accessing KGB Archives...
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="window resizable" id="notepad">
+        <div class="window-titlebar">
+          <span class="window-title">Pravda Editor</span>
+          <div class="window-controls">
+            <div class="window-minimize window-control-button">−</div>
+            <div class="window-maximize window-control-button">□</div>
+            <div class="window-close window-control-button">✕</div>
+          </div>
+        </div>
+        <div class="window-content">
+          <div class="notepad-menu">
+            <button class="notepad-story-button">Generate Manifesto</button>
+          </div>
+          <textarea
+            class="notepad-textarea"
+            style="
+              width: 100%;
+              height: calc(100% - 30px);
+              border: none;
+              outline: none;
+              resize: none;
+              background-color: white;
+              border: 1px solid #808080;
+            "
+          ></textarea>
+        </div>
+      </div>
+
+      <div class="window resizable" id="paint">
+        <div class="window-titlebar">
+          <span class="window-title">Labor Art</span>
+          <div class="window-controls">
+            <div class="window-minimize window-control-button">−</div>
+            <div class="window-maximize window-control-button">□</div>
+            <div class="window-close window-control-button">✕</div>
+          </div>
+        </div>
+        <div
+          class="window-content"
+          style="
+            display: flex;
+            flex-direction: column;
+            padding: 0;
+            margin: 0;
+            background-color: #5c5c5c;
+          "
+        >
+          <div class="paint-toolbar">
+            <div class="paint-colors">
+              <button
+                class="paint-color-swatch"
+                data-color="black"
+                style="background-color: black"
+              ></button>
+              <button
+                class="paint-color-swatch"
+                data-color="#8b0000"
+                style="background-color: #8b0000"
+              ></button>
+              <button
+                class="paint-color-swatch"
+                data-color="#ffd700"
+                style="background-color: #ffd700"
+              ></button>
+              <button
+                class="paint-color-swatch"
+                data-color="grey"
+                style="background-color: grey"
+              ></button>
+              <button
+                class="paint-color-swatch"
+                data-color="white"
+                style="background-color: white"
+              ></button>
+            </div>
+            <div class="paint-brush-sizes">
+              <button class="paint-size-button" data-size="2">S</button>
+              <button class="paint-size-button" data-size="5">M</button>
+              <button class="paint-size-button" data-size="10">L</button>
+            </div>
+            <button class="paint-clear-button">Redact</button>
+          </div>
+          <canvas
+            id="paint-canvas"
+            style="flex-grow: 1; background-color: white; cursor: crosshair; display: block"
+          ></canvas>
+        </div>
+      </div>
+
+      <div class="window resizable" id="doom">
+        <div class="window-titlebar">
+          <span class="window-title">Glorious Battle</span>
+          <div class="window-controls">
+            <div class="window-minimize window-control-button">−</div>
+            <div class="window-maximize window-control-button">□</div>
+            <div class="window-close window-control-button">✕</div>
+          </div>
+        </div>
+        <div class="window-content" id="doom-content">
+        </div>
+      </div>
+
+      <div class="window resizable" id="gemini">
+        <div class="window-titlebar">
+          <span class="window-title">State Intelligence AI</span>
+          <div class="window-controls">
+            <div class="window-minimize window-control-button">−</div>
+            <div class="window-maximize window-control-button">□</div>
+            <div class="window-close window-control-button">✕</div>
+          </div>
+        </div>
+        <div class="window-content gemini-chat-content">
+          <div class="gemini-chat-history">
+          </div>
+          <div class="gemini-chat-input-area">
+            <input type="text" class="gemini-chat-input" placeholder="State your request, comrade..." />
+            <button class="gemini-chat-send">Submit</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="window resizable" id="minesweeper" style="width: 400px; height: 450px">
+        <div class="window-titlebar">
+          <span class="window-title">Capitalist Mines</span>
+          <div class="window-controls">
+            <div class="window-minimize window-control-button">−</div>
+            <div class="window-maximize window-control-button">□</div>
+            <div class="window-close window-control-button">✕</div>
+          </div>
+        </div>
+        <div
+          class="window-content minesweeper-content"
+          style="
+            display: flex;
+            flex-direction: column;
+            padding: 0;
+            margin: 0;
+            background-color: #5c5c5c;
+          "
+        >
+          <div class="minesweeper-controls">
+            <div class="minesweeper-info minesweeper-flag-count">🚩 10</div>
+            <button class="minesweeper-reset-button">🫡</button>
+            <div class="minesweeper-info minesweeper-timer">⏱️ 0</div>
+          </div>
+          <div class="minesweeper-hint-area">
+            <button class="minesweeper-hint-button">💡 Advice</button>
+            <div class="minesweeper-commentary">Clear the fields for the Union!</div>
+          </div>
+          <div class="minesweeper-grid-container">
+            <div class="minesweeper-grid" id="minesweeper-board">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="window resizable" id="imageViewer" style="width: 350px; height: 300px">
+        <div class="window-titlebar">
+          <span class="window-title" id="image-viewer-title">Classified Viewer</span>
+          <div class="window-controls">
+            <div class="window-minimize window-control-button">−</div>
+            <div class="window-maximize window-control-button">□</div>
+            <div class="window-close window-control-button">✕</div>
+          </div>
+        </div>
+        <div
+          class="window-content image-viewer-content"
+          style="
+            padding: 0;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #333;
+          "
+        >
+          <img
+            id="image-viewer-img"
+            src=""
+            alt="Image"
+            style="max-width: 100%; max-height: 100%; object-fit: contain"
+          />
+        </div>
+      </div>
+
+      <div class="window resizable" id="mediaPlayer" style="width: 520px; height: 500px;">
+        <div class="window-titlebar">
+          <span class="window-title">Radio Moscow</span>
+          <div class="window-controls">
+            <div class="window-minimize window-control-button">−</div>
+            <div class="window-maximize window-control-button">□</div>
+            <div class="window-close window-control-button">✕</div>
+          </div>
+        </div>
+        <div class="window-content media-player-content">
+          <div class="media-player-url-bar">
+            <input type="text" class="media-player-input" placeholder="Enter Broadcast ID" />
+            <button class="media-player-load-button">Tune</button>
+          </div>
+          <div class="media-player-video-container">
+            <div id="youtube-player-mediaPlayer">
+                 <p class="media-player-status-message">Tuning to frequencies...</p>
+            </div>
+          </div>
+          <div class="media-player-controls-panel">
+            <div class="media-player-buttons-group">
+                <button class="media-player-control-button" id="media-player-play" title="Listen">▶</button>
+                <button class="media-player-control-button" id="media-player-pause" title="Halt">❚❚</button>
+                <button class="media-player-control-button" id="media-player-stop" title="Cease">■</button>
+            </div>
+            <div class="media-player-progress-bar-container-placeholder">
+                <div class="media-player-progress-bar-placeholder"></div>
+            </div>
+            <div class="media-player-volume-placeholder">
+                <span>🔊</span>
+                <div class="media-player-volume-slider-placeholder"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- Start Menu -->
+      <div class="start-menu" id="start-menu">
+        <div class="start-menu-item" data-app="myComputer">Comrade's PC</div>
+        <div class="start-menu-item" data-app="chrome">Iron Curtain</div>
+        <div class="start-menu-item" data-app="notepad">Pravda Editor</div>
+        <div class="start-menu-item" data-app="paint">Labor Art</div>
+        <div class="start-menu-item" data-app="doom">Glorious Battle</div>
+        <div class="start-menu-item" data-app="gemini">State Intelligence</div>
+        <div class="start-menu-item" data-app="minesweeper">Capitalist Mines</div>
+        <div class="start-menu-item" data-app="mediaPlayer">Radio Moscow</div>
+      </div>
+
+      <!-- Taskbar -->
+      <div id="taskbar">
+        <button id="start-button">
+          <span style="font-size: 1.2rem;">☭</span> STALINSOFT
+        </button>
+        <div id="taskbar-apps">
+        </div>
+        <div id="taskbar-controls">
+          <button id="taskbar-mute" class="taskbar-mute-button" title="Broadcast Audio">
+            <span id="mute-icon">🔊</span> <span id="mute-text">ON</span>
+          </button>
+          <div id="taskbar-clock">00:00:00</div>
+        </div>
+      </div>
+
+      <audio id="bg-music" loop preload="auto">
+        <source src="https://upload.wikimedia.org/wikipedia/commons/d/d0/Gimn_Sovetskogo_Soyuza_%281944_vocal%29.mp3" type="audio/mpeg" />
+      </audio>
+
+      <!-- Mechanical Sound Effects -->
+      <audio id="sfx-click" preload="auto">
+        <source src="https://upload.wikimedia.org/wikipedia/commons/3/30/Simple_click.ogg" type="audio/ogg" />
+      </audio>
+      <audio id="sfx-window-open" preload="auto">
+        <source src="https://upload.wikimedia.org/wikipedia/commons/c/c0/Mechanical_keyboard_switch.ogg" type="audio/ogg" />
+      </audio>
+      <audio id="sfx-window-close" preload="auto">
+        <source src="https://upload.wikimedia.org/wikipedia/commons/2/22/Mechanical_relay_operating.ogg" type="audio/ogg" />
+      </audio>
+      <audio id="sfx-minmax" preload="auto">
+        <source src="https://upload.wikimedia.org/wikipedia/commons/4/4e/Mechanical_switch_click.ogg" type="audio/ogg" />
+      </audio>
+      <audio id="sfx-alert" preload="auto">
+        <source src="https://upload.wikimedia.org/wikipedia/commons/b/b5/Old_mechanical_buzzer.ogg" type="audio/ogg" />
+      </audio>
+
+      <div id="paint-assistant">
+        <div class="assistant-bubble">Thinking...</div>
+        <img
+          src="https://storage.googleapis.com/gemini-95-icons/robot-assistant.gif"
+          alt="Paint Assistant"
+          class="assistant-image"
+        />
+      </div>
+
+      <!-- System Alert Dialog -->
+      <div id="system-alert-overlay" class="hidden">
+        <div id="system-alert-dialog">
+          <div id="system-alert-titlebar">
+            <span id="system-alert-title">STATE ALERT</span>
+          </div>
+          <div id="system-alert-content">
+            <p id="system-alert-message">System message goes here.</p>
+            <button id="system-alert-button">ACKNOWLEDGE</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  <script type="module" src="/index.ts"></script>
+</body>
+</html>
